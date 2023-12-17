@@ -40,17 +40,19 @@ const getVoteItemState = async () => {
     voteItemsState.value = data;
 }
 
-// 將使用者投票的項目加入
-const addNewItem = (itemNo) => {
-    const item = {
-        voter: voter.value,
-        itemNo: itemNo
-    }
-    voteRecord.value.push(item);
-}
-
 // 提交投票
 const submit = async () => {
+
+    for (let i = 0; i < voteItemsState.value.length; i++) {
+        if (voteItemsState.value[i].tr == true) {
+            const item = {
+                voter: voter.value,
+                itemNo: voteItemsState.value[i].itemNo
+            }
+            voteRecord.value.push(item);
+        }
+    }
+
     if (voteRecord.value.length === 0) {
         alert('至少勾選一個項目');
         return;
@@ -113,7 +115,7 @@ onMounted(() => {
                 <tr v-for="(item, index) in voteItemsState" :key="index">
                     <td class="t1">
                         <input class="form-check-input flex-shrink-0" type="checkbox" :value="item.itemNo"
-                            v-model="item[index]" @change="addNewItem(item.itemNo)">
+                            v-model="item.tr">
                     </td>
                     <td>
                         {{ item.itemName }}
