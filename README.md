@@ -9,3 +9,4 @@
   (src\main\resources\application.properties)
 * run VotesystemApplication
 * 進入前端目錄，輸入npm install安裝相關依賴，完成後輸入npm run dev啟動，即可完成專案操作
+* 訪問 http://127.0.0.1:5173/
